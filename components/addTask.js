@@ -26,24 +26,22 @@ export const addTask = (evento) =>{
     list.appendChild(task);
   }
   
-  const createTask = ({value, dateFormat}) => {
+  export const createTask = ({value, dateFormat}) => {
     const task = document.createElement('li');
-    task.classList.add('card');
-
+          task.classList.add('card');
     const taskContent = document.createElement('div');
-
     //Session storage sirve para almacenar datos mientras la pagina este abierta
     //local storage sirve para almacenar datos, pero solo el ultimo que se ingrese
     const titleTask = document.createElement('span');
-    titleTask.classList.add('task');
-    titleTask.innerText = value;
-    taskContent.appendChild(checkComplete());
-    taskContent.appendChild(titleTask);
+          titleTask.classList.add('task');
+          titleTask.innerText = value;
+          taskContent.appendChild(checkComplete());
+          taskContent.appendChild(titleTask);
     // task.innerHTML = content;
     const dateElement = document.createElement("span");
-    dateElement.innerHTML = dateFormat;
-    task.appendChild(taskContent);
-    task.appendChild(dateElement);
-    task.appendChild(deleteIcon());
+          dateElement.innerHTML = dateFormat;
+          task.appendChild(taskContent);
+          task.appendChild(dateElement);
+          task.appendChild(deleteIcon());
     return task;
   };
