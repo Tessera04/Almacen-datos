@@ -1,5 +1,6 @@
 import checkComplete from './checkComplete.js';
 import deleteIcon from './deleteIcon.js';
+import { displayTask } from './readTask.js';
 
 export const addTask = (evento) =>{
     evento.preventDefault();
@@ -20,14 +21,15 @@ export const addTask = (evento) =>{
     const taskObj = {
         value,
         dateFormat
-    }
+    };
+
+    list.innerHTML = '';
 
     const taskList = JSON.parse(localStorage.getItem('tasks')) || [];
     taskList.push(taskObj);
     localStorage.setItem("tasks", JSON.stringify(taskList));
 
-    const task = createTask(taskObj);
-    list.appendChild(task);
+    displayTask();
   }
   
   export const createTask = ({value, dateFormat}) => {
