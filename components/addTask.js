@@ -1,3 +1,4 @@
+import { uniqueDates } from '../services/date.js';
 import checkComplete from './checkComplete.js';
 import deleteIcon from './deleteIcon.js';
 import { displayTask } from './readTask.js';
@@ -18,9 +19,14 @@ export const addTask = (evento) =>{
 
     input.value = '';
     calendar.value = "";
+
+    const complete = false;
+
     const taskObj = {
         value,
-        dateFormat
+        dateFormat,
+        complete,
+        id: uuid.v4()
     };
 
     list.innerHTML = '';
@@ -32,16 +38,24 @@ export const addTask = (evento) =>{
     displayTask();
   }
   
-  export const createTask = ({value, dateFormat}) => {
+  export const createTask = ({value, dateFormat, complete, id}) => {
     const task = document.createElement('li');
           task.classList.add('card');
     const taskContent = document.createElement('div');
+
+    const check = checkComplete(id);
+
+    if(complete){
+        check.classList.toggle('fas');
+        check.classList.toggle('completeIcon');
+        check.classList.toggle('far');
+    }
     //Session storage sirve para almacenar datos mientras la pagina este abierta
     //local storage sirve para almacenar datos, pero solo el ultimo que se ingrese
     const titleTask = document.createElement('span');
           titleTask.classList.add('task');
           titleTask.innerText = value;
-          taskContent.appendChild(checkComplete());
+          taskContent.appendChild(checkComplete(id));
           taskContent.appendChild(titleTask);
     // task.innerHTML = content;
     const dateElement = document.createElement("span");
